@@ -34,13 +34,10 @@ namespace Snake.Models
         {            
             Thread t = new Thread(MoveSnake);
             t.Start();
-            //Timer t = new Timer(MoveSnake);
-            // t.Change(0, 200);
 
 
             while (!GameOver)
-            {
-                // Draw();                
+            {              
                 if (Game.snake.body.Count() == 3 + level)
                 {
                     level += 1;
@@ -115,7 +112,6 @@ namespace Snake.Models
         public void MoveSnake(object state)
         {
             while (!GameOver)
-            //if(!GameOver)
             {
                 if (dir == Direction.left)
                     snake.move(-1, 0);
@@ -149,7 +145,6 @@ namespace Snake.Models
         }
         public void Draw()
         {
-            //Console.Clear();
             food.Draw();
             snake.Draw();
             Console.SetCursorPosition(22, 31);

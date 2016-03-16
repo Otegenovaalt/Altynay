@@ -40,9 +40,7 @@ namespace Snake.Models
 
             FileStream fs = new FileStream(FileName, FileMode.Create, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(GetType());
-            //BinaryFormatter bf = new BinaryFormatter();
             xs.Serialize(fs, this);
-            //bf.Serialize(fs, this);
             fs.Close();
         }
 

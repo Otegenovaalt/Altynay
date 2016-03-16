@@ -75,17 +75,7 @@ namespace Snake.Models
                     Game.GameOver = true;
                 }
             }
-            /*
-             for (int i = 0; i <= 60; i++)
-             {
-                 if (body[0].x == i && body[0].y == 0 || body[0].x == i && body[0].y == 30)
-                     Game.GameOver = true;    
-             }
-             for (int i = 0; i<=30; i++)
-             {
-                 if (body[0].x == 0 && body[0].y == i || body[0].x == 60 && body[0].y == i)
-                     Game.GameOver = true;
-             }   */
+           
 
         }
     }
