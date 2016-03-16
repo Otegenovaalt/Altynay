@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace Game
 {
@@ -11,7 +12,7 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Models.Game snake = new Models.Game();
+            Snake.Models.Game snake = new Snake.Models.Game();
             Console.ReadKey();
 
         }

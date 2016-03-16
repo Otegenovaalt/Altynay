@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
-namespace Game.Models
+namespace Snake.Models
 {
-    public  class Point
+    public class Point
     {
         public int x, y;
         public Point(int x, int y)
         {
             this.x = x;
             this.y = y;
+        }
+
+        public Point()
+        {
+
         }
     }
 }

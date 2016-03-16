@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 using System.Xml.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Game.Models
+namespace Snake.Models
 {
     public class Drawer
     {
         public ConsoleColor color;
         public char sign;
         public List<Point> body = new List<Point>();
+
         public Drawer() { }
 
-        public void Draw()
+        public virtual void Draw()
         {
             Console.ForegroundColor = color;
-            foreach(Point p in body)
+            foreach (Point p in body)
             {
                 Console.SetCursorPosition(p.x, p.y);
                 Console.Write(sign);
             }
+
         }
 
         public void Save()
@@ -30,11 +33,12 @@ namespace Game.Models
             string FileName = "";
             if (sign == 'o')
                 FileName = "snake.xml";
-            if (sign == '$')
+            if (sign == '*')
                 FileName = "food.xml";
-            if (sign == '#')
+            if (sign == '=')
                 FileName = "wall.xml";
-            FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+            FileStream fs = new FileStream(FileName, FileMode.Create, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(GetType());
             //BinaryFormatter bf = new BinaryFormatter();
             xs.Serialize(fs, this);
@@ -42,24 +46,23 @@ namespace Game.Models
             fs.Close();
         }
 
-
         public void Resume()
         {
             string FileName = "";
             if (sign == 'o')
                 FileName = "snake.xml";
-            if (sign == '$')
+            if (sign == '*')
                 FileName = "food.xml";
-            if (sign == '#')
+            if (sign == '=')
                 FileName = "wall.xml";
 
-            FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            FileStream fs = new FileStream(FileName, FileMode.Open, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(GetType());
             //BinaryFormatter bf = new BinaryFormatter();
 
-            if (sign == '$')
+            if (sign == '*')
                 Game.food = xs.Deserialize(fs) as Food;
-            if (sign == '#')
+            if (sign == '=')
                 Game.wall = xs.Deserialize(fs) as Wall;
 
             if (sign == 'o')
@@ -69,5 +72,6 @@ namespace Game.Models
 
         }
 
+
     }
-    }
+}

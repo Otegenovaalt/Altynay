@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Game.Models
+namespace Snake.Models
 {
     public class Wall : Drawer
     {
@@ -19,26 +19,29 @@ namespace Game.Models
         {
 
         }
+
         public void Init(int level)
         {
             body.Clear();
             FileStream fs = new FileStream(string.Format(@"level{0}.txt", level), FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
 
-            string[] arr = sr.ReadToEnd().Split('\n');
+            string[] token = sr.ReadToEnd().Split('\n');
             int col = -1;
-            foreach(string s in arr)
+            foreach (string s in token)
             {
                 col++;
                 int row = -1;
-                foreach(char ch in s)
+                foreach (char ch in s)
                 {
                     row++;
                     if (ch == '#')
                         body.Add(new Point(row, col));
                 }
-            }
-        }
 
+
+            }
+            
+        }
     }
 }
