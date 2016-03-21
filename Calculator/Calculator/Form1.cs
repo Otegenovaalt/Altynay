@@ -17,14 +17,20 @@ namespace Calculator
         public double result;
         public double data;
         public string operation;
+        public double s;
+        public double minus;
+        public double plus;
+        public bool z;
 
         public Form1()
         {
             InitializeComponent();
+            z = true;
         }
 
         private void num_click(object sender, EventArgs e)
         {
+            display.Text = "";
             Button btn = sender as Button;
             display.Text += btn.Text; 
 
@@ -37,61 +43,46 @@ namespace Calculator
             first = double.Parse(display.Text);
             display.Text = "";
             operation = btn.Text;
-
+            z = false;
         }
 
         private void result_click(object sender, EventArgs e)
         {
-            second = double.Parse(display.Text);
-            switch (operation)
-            {
-                case "+":
-                    result = first + second;
-                    break;
-                default:
-                    break;
+            if (!z) {
+                second = double.Parse(display.Text);
             }
+            /*else
+            {
+                first = result;
+            }*/
+            MessageBox.Show("first="+first+"\n"+"second="+second+"\n"+"result="+result + "\n" + "bool"+z);
             switch (operation)
             {
+                
+                case "+":
+                    result = second + first;
+                    break;
                 case "-":
                     result = first - second;
                     break;
-                default:
-                    break;
-            }
-            switch (operation)
-            {
                 case "*":
                     result = first * second;
                     break;
-                default:
-                    break;
-            }
-            switch (operation)
-            {
                 case "/":
                     result = first / second;
                     break;
-                default:
-                    break;
-            }
-            switch (operation)
-            {
                 case "%":
                     result = (second * first) / 100;
                     break;
-                default:
-                    break;
-            }
-            switch (operation)
-            {
                 case "x^y":
                     result = Math.Pow(first, second);
                     break;
                 default:
                     break;
             }
-            display.Text = result + ""; 
+            if(!z)
+                z = true;
+            
         }
 
         private void memory(object sender, EventArgs e)
@@ -102,12 +93,14 @@ namespace Calculator
 
         private void Clear(object sender, EventArgs e)
         {
-            display.Text = Convert.ToString(" ");
+            display.Text = Convert.ToString(0);
+            
         }
 
         private void zapyataya_click(object sender, EventArgs e)
         {
-            display.Text = display.Text + ",";
+            if(!display.Text.Contains(","))
+                display.Text = display.Text + ",";
         }
 
         private void koren(object sender, EventArgs e)
@@ -133,7 +126,8 @@ namespace Calculator
 
         private void CEshka(object sender, EventArgs e)
         {
-            display.Text = Convert.ToString(0); 
+            display.Text = Convert.ToString(0);
+            display.Clear();
         }
 
         private void Odin_delit(object sender, EventArgs e)
@@ -163,10 +157,42 @@ namespace Calculator
 
         private void m_save(object sender, EventArgs e)
         {
-            double s;
             s = Convert.ToDouble(display.Text);
-            
+            Console.WriteLine(s + "Number in Memory");
+        }
 
+        private void back(object sender, EventArgs e)
+        {
+            if (display.Text != "")
+            {
+                display.Text = display.Text.Remove(display.Text.Length - 1, 1);
+            }
+            else
+            {
+                return;
+            } 
+        }
+
+        private void MR(object sender, EventArgs e)
+        {
+            display.Text = s.ToString(); 
+        }
+
+        private void MC(object sender, EventArgs e)
+        {
+            s = 0;
+        }
+
+        private void Mplus(object sender, EventArgs e)
+        {
+            plus = double.Parse(display.Text);
+            s = s + plus;
+        }
+
+        private void Mminus(object sender, EventArgs e)
+        {
+            minus = double.Parse(display.Text);
+            s = s - minus;
         }
     }
 }
